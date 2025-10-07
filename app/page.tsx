@@ -109,7 +109,7 @@ export default function HomePage() {
               <span>Trusted Worldwide</span>
             </div>
             <h1 className="text-4xl md:text-6xl font-bold text-balance bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent leading-tight">
-              Official Internship Certificates from Quro Tech
+              Official Internship Certificates from ProofNex
             </h1>
             <p className="text-lg text-muted-foreground text-pretty leading-relaxed">
               Trusted by learners worldwide. Each certificate includes a unique QR and serial number for instant public
@@ -269,7 +269,7 @@ export default function HomePage() {
                               : "2 Months"
                         }
                         serial="QT-PREVIEW-00000"
-                        qrPayload="https://qurotech.example/verify/QT-PREVIEW-00000"
+                        qrPayload="https://proofnex.example/verify/QT-PREVIEW-00000"
                         isPreview
                       />
                     </div>
@@ -281,7 +281,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Why Quro Tech */}
+  {/* Why ProofNex */}
       <section className="grid gap-6 md:grid-cols-3">
         <div className="rounded-xl p-4 bg-card ring-1 ring-accent/30 hover:shadow-md transition">
           <div className="font-semibold">ISO Certified</div>
@@ -365,33 +365,15 @@ export default function HomePage() {
         ))}
       </section>
 
-      {/* Certificate Gallery */}
-      <section className="space-y-3">
-        <h2 className="text-2xl font-semibold">Certificate Gallery</h2>
-        <p className="text-sm text-muted-foreground">
-          See how your certificate will look. Each carries a gold seal, unique serial and QR.
-        </p>
-        <div className="grid gap-4 md:grid-cols-2">
-          <img
-            src="/images/certificates/quro-standard.jpg"
-            alt="Quro Tech standard certificate"
-            className="w-full rounded-lg border"
-          />
-          <img
-            src="/images/certificates/quro-gold.jpg"
-            alt="Quro Tech gold certificate"
-            className="w-full rounded-lg border"
-          />
-        </div>
-      </section>
+      {/* Certificate Gallery removed per request */}
 
       <section className="rounded-3xl bg-gradient-to-br from-primary/10 via-primary/5 to-accent/10 border border-primary/20 p-8 md:p-12 text-center space-y-6">
         <h2 className="text-3xl font-bold">Contact & Support</h2>
         <div className="text-lg text-muted-foreground max-w-2xl mx-auto">
           <p>
             For buying-related queries, write to{" "}
-            <a href="mailto:qurotechofficial@gmail.com" className="text-primary underline font-medium">
-              qurotechofficial@gmail.com
+            <a href="mailto:contact@proofnex.example" className="text-primary underline font-medium">
+              contact@proofnex.example
             </a>
             .
           </p>
@@ -400,11 +382,11 @@ export default function HomePage() {
           <ul className="text-sm text-muted-foreground mt-4 space-y-1 list-disc list-inside">
             <li><strong>Payments:</strong> All payments are final and non-refundable unless required by law.</li>
             <li><strong>Community Guidelines:</strong> Be respectful. Harassment, hate speech, or disruptive behaviour will lead to removal.</li>
-            <li><strong>Copyright:</strong> Course content and certificates are the intellectual property of Quro Tech. Unauthorized redistribution is prohibited.</li>
+            <li><strong>Copyright:</strong> Course content and certificates are the intellectual property of ProofNex. Unauthorized redistribution is prohibited.</li>
           </ul>
         </div>
         <Button size="lg" className="rounded-full px-8 py-3 text-base font-semibold" asChild>
-          <a href="mailto:qurotechofficial@gmail.com">Contact Us</a>
+          <a href="mailto:contact@proofnex.example">Contact Us</a>
         </Button>
       </section>
     </div>
