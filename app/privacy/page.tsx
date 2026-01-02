@@ -1,6 +1,6 @@
 export const metadata = {
-  title: 'Privacy Policy - Quro Tech',
-  description: 'Privacy practices for Quro Tech.'
+  title: 'Privacy Policy - ProofNex',
+  description: 'Privacy practices for ProofNex.'
 }
 
 export default function PrivacyPage() {
@@ -10,7 +10,7 @@ export default function PrivacyPage() {
       <p className="text-sm text-muted-foreground mb-3">
         We collect minimal personal data required to issue certificates (name, email, and
         certificate metadata). We do not sell personal data. For more details about data usage,
-  contact qurotechofficial@gmail.com.
+  contact contact@proofnex.example.
       </p>
       <h2 className="font-semibold mt-4">Data retention</h2>
       <p className="text-sm text-muted-foreground">Certificate records are retained as required by law and for verification purposes.</p>

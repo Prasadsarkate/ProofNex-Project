@@ -156,7 +156,7 @@ export function RazorpayCheckout({ items, total, onSuccess, onError }: RazorpayC
         key: orderData.keyId,
         amount: orderData.amount,
         currency: orderData.currency,
-        name: "Quro Tech Certificates",
+  name: "ProofNex Certificates",
   description: `Certificate${items.length > 1 ? "s" : ""} for ${items.map((item) => item.durationLabel || item.course || item.internship || item.name).join(", ")}`,
         order_id: orderData.orderId,
         handler: async (response: any) => {

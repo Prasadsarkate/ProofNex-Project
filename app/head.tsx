@@ -5,7 +5,7 @@ export default function Head() {
       <meta charSet="utf-8" />
       <link rel="icon" href="/placeholder-logo.png" />
       <link rel="apple-touch-icon" href="/placeholder-logo.png" />
-      <meta name="description" content="Quro Tech - Demo certificates and verification" />
+  <meta name="description" content="ProofNex - Demo certificates and verification" />
     </>
   )
 }

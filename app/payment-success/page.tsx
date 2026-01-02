@@ -228,7 +228,7 @@ export default function PaymentSuccessPage() {
                         if (navigator.share) {
                           navigator.share({
                             title: `${cert.full_name} - ${cert.internship} Certificate`,
-                            text: `Check out my certificate from Quro Tech for ${cert.internship}`,
+                            text: `Check out my certificate from ProofNex for ${cert.internship}`,
                             url: `${window.location.origin}/verify?serial=${encodeURIComponent(cert.serial)}`,
                           })
                         }

@@ -13,7 +13,7 @@ export type CartItem = {
   customWeeks?: number
 }
 
-const KEY = "qurotech.cart"
+const KEY = "proofnex.cart"
 
 function readCart(): CartItem[] {
   if (typeof window === "undefined") return []

@@ -1,12 +1,27 @@
 "use client"
 
 import { useCart } from "@/hooks/use-cart"
+import { useEffect, useState } from "react"
+import { createBrowserClient } from "@supabase/ssr"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { useState } from "react"
-import { RazorpayCheckout } from "@/components/razorpay-checkout"
 
+import { RazorpayCheckout } from "@/components/razorpay-checkout"
 export default function CheckoutPage() {
+  const [checkedLogin, setCheckedLogin] = useState(false);
+  useEffect(() => {
+    const supabase = createBrowserClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
+    supabase.auth.getUser().then(({ data }) => {
+      if (!data?.user) {
+        window.location.href = "/login";
+      } else {
+        setCheckedLogin(true);
+      }
+    });
+  }, []);
   const { items, removeItem, clear } = useCart()
   const total = items.reduce((sum, i) => sum + i.price, 0)
   const [showPayment, setShowPayment] = useState(false)
@@ -29,6 +44,10 @@ export default function CheckoutPage() {
     price: item.price,
     quantity: 1,
   }))
+
+  if (!checkedLogin) {
+    return null;
+  }
 
   if (success) {
     return (
@@ -204,3 +223,4 @@ export default function CheckoutPage() {
     </div>
   )
 }
+

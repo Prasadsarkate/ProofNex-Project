@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
+import { UserIcon, EnvelopeIcon, CakeIcon, UserGroupIcon, PencilSquareIcon } from "@heroicons/react/24/outline"
 
 type Props = {
   initialName?: string | null
@@ -121,53 +122,58 @@ export default function ProfileForm({
   }
 
   return (
-    <div className="max-w-2xl mx-auto bg-card border rounded-lg p-6">
-      <h3 className="text-lg font-semibold mb-4">Edit Profile</h3>
-
-  <form className="space-y-4" onSubmit={handleSave}>
+    <div className="max-w-2xl mx-auto bg-gradient-to-br from-white via-blue-50 to-blue-100 border border-blue-200 rounded-3xl shadow-2xl p-8 mt-4">
+      <div className="flex items-center gap-4 mb-6">
+        <UserIcon className="h-10 w-10 text-blue-500 bg-blue-100 rounded-full p-2 shadow" />
         <div>
-          <label className="block text-sm text-muted-foreground mb-1">Full name</label>
+          <h2 className="text-2xl font-bold text-blue-900 flex items-center gap-2">
+            {name ? `Welcome back, ${name}!` : "Welcome!"}
+            <span className="text-2xl">👋</span>
+          </h2>
+          <p className="text-blue-700 text-sm mt-1">Manage your profile details below.</p>
+        </div>
+      </div>
+
+      <form className="space-y-6" onSubmit={handleSave}>
+        <div className="flex items-center gap-3">
+          <UserIcon className="h-5 w-5 text-blue-400" />
           <input
-            className="w-full border rounded px-3 py-2"
+            className="flex-1 border border-blue-200 rounded px-3 py-2 focus:ring-2 focus:ring-blue-300 bg-white"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Your full name"
           />
         </div>
-
-        <div>
-          <label className="block text-sm text-muted-foreground mb-1">Email</label>
+        <div className="flex items-center gap-3">
+          <EnvelopeIcon className="h-5 w-5 text-blue-400" />
           <input
-            className="w-full border rounded px-3 py-2"
+            className="flex-1 border border-blue-200 rounded px-3 py-2 focus:ring-2 focus:ring-blue-300 bg-white"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
             type="email"
           />
         </div>
-
         <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm text-muted-foreground mb-1">Age</label>
+          <div className="flex items-center gap-3">
+            <CakeIcon className="h-5 w-5 text-blue-400" />
             <input
-              className="w-full border rounded px-3 py-2"
+              className="flex-1 border border-blue-200 rounded px-3 py-2 focus:ring-2 focus:ring-blue-300 bg-white"
               value={age === "" ? "" : String(age)}
               onChange={(e) => {
                 const v = e.target.value
                 if (v === "") setAge("")
                 else setAge(Number(v))
               }}
-              
               type="number"
               min={0}
               placeholder="e.g. 25"
             />
           </div>
-
-          <div>
-            <label className="block text-sm text-muted-foreground mb-1">Gender</label>
+          <div className="flex items-center gap-3">
+            <UserGroupIcon className="h-5 w-5 text-blue-400" />
             <select
-              className="w-full border rounded px-3 py-2"
+              className="flex-1 border border-blue-200 rounded px-3 py-2 focus:ring-2 focus:ring-blue-300 bg-white"
               value={gender}
               onChange={(e) => setGender(e.target.value)}
             >
@@ -178,18 +184,18 @@ export default function ProfileForm({
             </select>
           </div>
         </div>
-
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 mt-4">
           <button
             type="submit"
             disabled={saving}
-            className="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded"
+            className="inline-flex items-center gap-2 px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow transition"
           >
+            <PencilSquareIcon className="h-5 w-5" />
             {saving ? "Saving..." : "Save"}
           </button>
           <button
             onClick={handleReset}
-            className="inline-flex items-center px-4 py-2 border rounded text-sm"
+            className="inline-flex items-center px-4 py-2 border border-blue-200 rounded-lg text-sm bg-white hover:bg-blue-50 transition"
           >
             Reset
           </button>
@@ -200,15 +206,14 @@ export default function ProfileForm({
                 setSaved(false)
                 setMessage(null)
               }}
-              className="inline-flex items-center px-3 py-1 border rounded text-sm"
+              className="inline-flex items-center px-3 py-1 border border-blue-200 rounded-lg text-sm bg-white hover:bg-blue-50 transition"
             >
               Edit
             </button>
           )}
         </div>
       </form>
-
-      {message && <div className="mt-3 text-sm">{message}</div>}
+      {message && <div className="mt-4 text-sm text-blue-700">{message}</div>}
     </div>
   )
 }

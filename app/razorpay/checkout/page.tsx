@@ -30,7 +30,7 @@ export default function RazorpayCheckoutPage() {
           amount: data.amount,
           currency: data.currency,
           order_id: data.orderId,
-          name: 'Quro Tech',
+          name: 'ProofNex',
           description: 'Certificate purchase',
           handler: function (response: any) {
             // On success redirect to success page with payment details (ideally verify on server)

@@ -1,14 +1,14 @@
 export const metadata = {
-  title: 'How Quro Tech Works',
-  description: 'Overview of how Quro Tech issues and verifies certificates.'
+  title: 'How ProofNex Works',
+  description: 'Overview of how ProofNex issues and verifies certificates.'
 }
 
 export default function HowItWorksPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="text-2xl font-semibold mb-4">How Quro Tech Works</h1>
+  <h1 className="text-2xl font-semibold mb-4">How ProofNex Works</h1>
       <p className="text-sm text-muted-foreground mb-3">
-        Quro Tech issues verified internship certificates with unique serials and QR codes.
+  ProofNex issues verified internship certificates with unique serials and QR codes.
         Each certificate is stored as a record in our database and can be verified publicly
         using the certificate serial or QR code which links to the verify page.
       </p>

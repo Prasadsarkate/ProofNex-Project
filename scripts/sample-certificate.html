@@ -4,14 +4,19 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Sample Certificate Preview (Enhanced)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    body { font-family: Inter, Arial, sans-serif; background:#f3f4f6; display:flex; align-items:center; justify-content:center; height:100vh; margin:0 }
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Great+Vibes&family=Montserrat:wght@400;600&display=swap');
+    body { font-family: Inter, Arial, sans-serif; background:linear-gradient(120deg, #1a365d 0%, #2d3748 100%); display:flex; align-items:center; justify-content:center; height:100vh; margin:0 }
     .container { width: 1200px; max-width: 95%; }
-    .controls { display:flex; gap:8px; margin-bottom:12px; align-items:center }
-    button { padding:10px 14px; border-radius:8px; border:1px solid #e5e7eb; background:#fff; cursor:pointer }
-    canvas { width:100%; border-radius:12px; box-shadow: 0 10px 30px rgba(2,6,23,0.08); display:block }
-    label { font-size:13px; margin-right:8px }
-    input, select { padding:8px 10px; border-radius:8px; border:1px solid #e5e7eb }
+    .controls { display:flex; gap:8px; margin-bottom:12px; align-items:center; background: rgba(255,255,255,0.1); padding: 15px; border-radius: 12px; backdrop-filter: blur(10px) }
+    button { padding:12px 20px; border-radius:10px; border:none; background:linear-gradient(to right, #f6ad55, #ed8936); color: white; cursor:pointer; font-weight:600; transition: all 0.3s ease }
+    button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(237,137,54,0.4) }
+    canvas { width:100%; border-radius:14px; box-shadow: 0 25px 50px rgba(0,0,0,0.25); display:block }
+    label { font-size:13px; margin-right:8px; color: white }
+    input, select { padding:10px 14px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); color: white }
+    input::placeholder { color: rgba(255,255,255,0.5) }
   </style>
 </head>
 <body>
@@ -50,53 +55,160 @@
       // clear
       ctx.clearRect(0,0,canvas.width, canvas.height);
 
-      // background gradients (enhanced)
-      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height)
+      // Elegant background
+      const gradient = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 0, canvas.width/2, canvas.height/2, canvas.width/2)
       gradient.addColorStop(0, '#ffffff')
-      gradient.addColorStop(0.3, '#f8fafc')
-      gradient.addColorStop(0.7, '#f1f5f9')
-      gradient.addColorStop(1, '#e2e8f0')
+      gradient.addColorStop(0.7, '#f8fafc')
+      gradient.addColorStop(1, '#f1f5f9')
       ctx.fillStyle = gradient
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-      // outer border
-      ctx.strokeStyle = '#0f172a'
-      ctx.lineWidth = 12
-      ctx.strokeRect(25, 25, canvas.width - 50, canvas.height - 50)
+      // Background pattern
+      ctx.save()
+      ctx.globalAlpha = 0.03
+      for(let i = 0; i < canvas.width; i += 40) {
+        for(let j = 0; j < canvas.height; j += 40) {
+          ctx.beginPath()
+          ctx.arc(i, j, 1, 0, Math.PI * 2)
+          ctx.fillStyle = '#1a365d'
+          ctx.fill()
+        }
+      }
+      ctx.restore()
 
-      // inner gilded border
-      const borderGradient = ctx.createLinearGradient(0, 0, canvas.width, 0)
-      borderGradient.addColorStop(0, '#fbbf24')
-      borderGradient.addColorStop(0.5, '#f59e0b')
-      borderGradient.addColorStop(1, '#d97706')
+      // Decorative corners
+      const cornerSize = 100
+      function drawCorner(x, y, rotate) {
+        ctx.save()
+        ctx.translate(x, y)
+        ctx.rotate(rotate * Math.PI / 180)
+        
+        const cornerGradient = ctx.createLinearGradient(0, 0, cornerSize, cornerSize)
+        cornerGradient.addColorStop(0, '#f6ad55')
+        cornerGradient.addColorStop(1, '#ed8936')
+        
+        ctx.strokeStyle = cornerGradient
+        ctx.lineWidth = 8
+        ctx.beginPath()
+        ctx.moveTo(0, 0)
+        ctx.lineTo(cornerSize, 0)
+        ctx.moveTo(0, 0)
+        ctx.lineTo(0, cornerSize)
+        ctx.stroke()
+        ctx.restore()
+      }
+
+      // Draw corners
+      drawCorner(50, 50, 0)
+      drawCorner(canvas.width - 50, 50, 90)
+      drawCorner(50, canvas.height - 50, -90)
+      drawCorner(canvas.width - 50, canvas.height - 50, 180)
+
+      // Main border with gradient
+      const borderGradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height)
+      borderGradient.addColorStop(0, '#f6ad55')
+      borderGradient.addColorStop(0.5, '#ed8936')
+      borderGradient.addColorStop(1, '#dd6b20')
+      
       ctx.strokeStyle = borderGradient
-      ctx.lineWidth = 6
+      ctx.lineWidth = 3
       ctx.strokeRect(35, 35, canvas.width - 70, canvas.height - 70)
 
-      // header bar
-      const headerGradient = ctx.createLinearGradient(0, 35, 0, 120)
-      headerGradient.addColorStop(0, '#1e293b')
-      headerGradient.addColorStop(1, '#334155')
-      ctx.fillStyle = headerGradient
-      ctx.fillRect(35, 35, canvas.width - 70, 85)
+      // Inner border
+      ctx.strokeStyle = 'rgba(237,137,54,0.3)'
+      ctx.lineWidth = 1
+      ctx.strokeRect(45, 45, canvas.width - 90, canvas.height - 90)
 
-      // company name
-      ctx.shadowColor = 'rgba(0,0,0,0.25)'
-      ctx.shadowBlur = 4
-      ctx.shadowOffsetY = 2
-      ctx.fillStyle = '#ffffff'
-      ctx.font = 'bold 52px serif'
+      // Draw ProofNex logo
+      const logoSize = 80;
+      ctx.save();
+      ctx.fillStyle = '#1a365d';
+      ctx.font = '70px "Font Awesome 6 Free"';
+      ctx.textAlign = 'center';
+      ctx.fillText('', canvas.width/2 - 220, 120); // Shield icon
+      
+      // Certificate seal
+      ctx.save()
+      const sealX = canvas.width - 160
+      const sealY = canvas.height - 160
+      
+      // Draw circular seal
+      ctx.beginPath()
+      ctx.arc(sealX, sealY, 45, 0, Math.PI * 2)
+      const sealGradient = ctx.createRadialGradient(sealX, sealY, 0, sealX, sealY, 45)
+      sealGradient.addColorStop(0, '#f6ad55')
+      sealGradient.addColorStop(1, '#ed8936')
+      ctx.fillStyle = sealGradient
+      ctx.fill()
+      
+      // Inner circle
+      ctx.beginPath()
+      ctx.arc(sealX, sealY, 35, 0, Math.PI * 2)
+      ctx.strokeStyle = 'white'
+      ctx.lineWidth = 2
+      ctx.stroke()
+      
+      // Seal text
+      ctx.fillStyle = 'white'
+      ctx.font = 'bold 14px Montserrat'
       ctx.textAlign = 'center'
-      ctx.fillText('🏆 Quro Tech', canvas.width / 2, 95)
+      ctx.fillText('VERIFIED', sealX, sealY - 8)
+      ctx.font = '12px Montserrat'
+      ctx.fillText('ProofNex™', sealX, sealY + 8)
+      
+      // Add checkmark icon
+      ctx.font = '16px "Font Awesome 6 Free"'
+      ctx.fillText('', sealX, sealY + 25)
+      
+      ctx.restore()
 
-      // reset shadow
-      ctx.shadowColor = 'transparent'
-      ctx.shadowBlur = 0
-      ctx.shadowOffsetY = 0
+      // Elegant header with icon
+      ctx.fillStyle = '#1a365d'
+      ctx.font = 'bold 60px "Cormorant Garamond"'
+      ctx.textAlign = 'center'
+      ctx.fillText('Certificate of Completion', canvas.width / 2, 120)
 
-      // subtitle
-      ctx.fillStyle = '#fbbf24'
-      ctx.font = '22px serif'
+      // Decorative lines under header
+      function drawDecorativeLine(yPos) {
+        const lineLength = 180;
+        const startX = canvas.width/2 - lineLength;
+        const endX = canvas.width/2 + lineLength;
+        
+        const lineGradient = ctx.createLinearGradient(startX, 0, endX, 0);
+        lineGradient.addColorStop(0, 'transparent');
+        lineGradient.addColorStop(0.2, '#ed8936');
+        lineGradient.addColorStop(0.8, '#ed8936');
+        lineGradient.addColorStop(1, 'transparent');
+        
+        ctx.strokeStyle = lineGradient;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(startX, yPos);
+        ctx.lineTo(endX, yPos);
+        ctx.stroke();
+        
+        // Add decorative dots
+        ctx.fillStyle = '#ed8936';
+        ctx.beginPath();
+        ctx.arc(startX - 10, yPos, 3, 0, Math.PI * 2);
+        ctx.arc(endX + 10, yPos, 3, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      
+      drawDecorativeLine(140);
+      
+      // Company name with icon
+      ctx.fillStyle = '#2d3748'
+      ctx.font = '46px "Great Vibes"'
+      ctx.fillText('ProofNex', canvas.width / 2, 190)
+      
+      // Add small icon next to company name
+      ctx.font = '20px "Font Awesome 6 Free"'
+      ctx.fillText('', canvas.width/2 + 100, 190) // Small shield icon
+
+      // Subtitle styling
+      ctx.fillStyle = '#4a5568'
+      ctx.font = '24px "Cormorant Garamond"'
       ctx.fillText('• ISO 9001:2015 Certified • Trusted Digital Verification •', canvas.width / 2, 155)
 
       // certificate header
@@ -146,40 +258,81 @@
       ctx.font = '20px serif'
       ctx.fillText('with outstanding performance and dedication', canvas.width / 2, 540)
 
-      // footer left
+      // footer left with icons
       ctx.fillStyle = '#1e293b'
-      ctx.font = 'bold 18px monospace'
+      ctx.font = 'bold 16px Montserrat'
       ctx.textAlign = 'left'
-      ctx.fillText(`Certificate ID: ${serial}`, 80, 720)
+      
+      // Certificate ID with icon
+      ctx.font = '14px "Font Awesome 6 Free"'
+      ctx.fillText('', 80, 720) // ID card icon
+      ctx.font = 'bold 16px Montserrat'
+      ctx.fillText(`  Certificate ID: ${serial}`, 100, 720)
 
       ctx.fillStyle = '#64748b'
-      ctx.font = '16px serif'
-      ctx.fillText('Date of Issue: ' + new Date().toLocaleDateString(), 80, 745)
-      ctx.fillText('Verify at: qurotech.com/verify', 80, 770)
+      ctx.font = '14px Montserrat'
+      
+      // Date with icon
+      ctx.font = '14px "Font Awesome 6 Free"'
+      ctx.fillText('', 80, 745) // Calendar icon
+      ctx.font = '14px Montserrat'
+      ctx.fillText('  Date of Issue: ' + new Date().toLocaleDateString(), 100, 745)
+      
+      // Verify link with icon
+      ctx.font = '14px "Font Awesome 6 Free"'
+      ctx.fillText('', 80, 770) // Link icon
+      ctx.font = '14px Montserrat'
+      ctx.fillText('  Verify at: proofnex.com/verify', 100, 770)
 
-      // footer right
+      // footer right with icons
       ctx.textAlign = 'right'
       ctx.fillStyle = '#1e293b'
-      ctx.font = 'bold 18px serif'
-      ctx.fillText('Authorized by Quro Tech', canvas.width - 80, 720)
+      ctx.font = 'bold 16px Montserrat'
+      ctx.fillText('Authorized by ProofNex', canvas.width - 80, 720)
+      
       ctx.fillStyle = '#64748b'
-      ctx.font = '16px serif'
+      ctx.font = '14px Montserrat'
+      
+      // Security badge
+      ctx.font = '14px "Font Awesome 6 Free"'
+      ctx.fillText('', canvas.width - 240, 745) // Shield icon
+      ctx.font = '14px Montserrat'
       ctx.fillText('Digitally Verified & Secured', canvas.width - 80, 745)
-      ctx.fillText('✓ Authentic Certificate', canvas.width - 80, 770)
+      
+      // Checkmark
+      ctx.font = '14px "Font Awesome 6 Free"'
+      ctx.fillText('', canvas.width - 200, 770) // Check icon
+      ctx.font = '14px Montserrat'
+      ctx.fillText('Authentic Certificate', canvas.width - 80, 770)
 
-      // QR code
+      // QR code (smaller and more elegant)
       const serialSafe = encodeURIComponent(serial)
-      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${serialSafe}`
+      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${serialSafe}&margin=1&color=1e293b`
       const img = new Image()
       img.crossOrigin = 'anonymous'
       img.onload = () => {
-        // QR bg
-        ctx.fillStyle = '#ffffff'
-        ctx.fillRect(canvas.width - 220, 550, 170, 170)
-        ctx.strokeStyle = '#e2e8f0'
-        ctx.lineWidth = 2
-        ctx.strokeRect(canvas.width - 220, 550, 170, 170)
-        ctx.drawImage(img, canvas.width - 210, 560, 150, 150)
+        // QR background with subtle gradient
+        ctx.save()
+        const qrGradient = ctx.createLinearGradient(canvas.width - 170, 550, canvas.width - 50, 670)
+        qrGradient.addColorStop(0, '#ffffff')
+        qrGradient.addColorStop(1, '#f8fafc')
+        ctx.fillStyle = qrGradient
+        ctx.fillRect(canvas.width - 170, 550, 120, 120)
+        
+        // Subtle border
+        ctx.strokeStyle = 'rgba(226,232,240,0.8)'
+        ctx.lineWidth = 1
+        ctx.strokeRect(canvas.width - 170, 550, 120, 120)
+        
+        // Draw QR code
+        ctx.drawImage(img, canvas.width - 165, 555, 110, 110)
+        
+        // QR code label
+        ctx.fillStyle = '#64748b'
+        ctx.font = '12px Montserrat'
+        ctx.textAlign = 'center'
+        ctx.fillText('Scan to Verify', canvas.width - 110, 690)
+        ctx.restore()
       }
       img.src = qrUrl
     }
